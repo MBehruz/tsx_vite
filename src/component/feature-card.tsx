@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { features } from "../util/constant";
 import { styles } from "../util/style";
-
+import { motion } from "framer-motion";
 interface Props {
     icon: JSX.Element;
     title: string;
@@ -16,11 +16,17 @@ const FeatureCard: FC<Props> = ({ icon, title, content, idx }) => {
             className={`flex flex-row p-6 rounded-[20px] feature-card cursor-pointer ${idx === features.length - 1 ? "mb-0" : "mb-6"
                 }`}
         >
-            <div
+            <motion.div
+                whileHover={{ scale: 1.1, rotate: 360 }}
+                transition={{
+                    default: { duration: 0.8, ease: "easeInOut" },
+                    fill: { duration: 0.1, ease: [0.1, 0, 0.1, 0.1] }
+                }}
+                whileTap={{ rotate: 360, }}
                 className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-lightBlue`}
             >
                 {icon}
-            </div>
+            </motion.div>
 
             <div className={`flex-1 flex flex-col ml-3`}>
                 <h4

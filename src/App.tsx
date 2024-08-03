@@ -12,10 +12,17 @@ import {
   Testimonials,
 } from './component';
 import { styles } from './util/style';
+import { motion, useScroll } from "framer-motion";
 
 const App = () => {
+  const { scrollYProgress } = useScroll();
   return (
+
     <div className='bg-primary w-full overflow-hidden'>
+      <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress }}
+      />
       {/* Navbar */}
       <div className={`${styles.paddingX} ${styles.flexStart} `}>
         <div className={`${styles.container}`}>
@@ -31,9 +38,7 @@ const App = () => {
       </div>
 
       {/* Statistics */}
-      <div
-        className={`bg-primary ${styles.paddingX} ${styles.flexStart} `}
-      >
+      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart} `}>
         <div className={`${styles.container}`}>
           <Statistics />
           <Contract />
@@ -46,6 +51,7 @@ const App = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { FaQuoteRight } from "react-icons/fa";
 import { feedbacks } from "../util/constant";
 import { FC } from "react";
@@ -9,10 +10,17 @@ interface Props {
     content: string
 }
 
+const initialsVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 }
+};
+
 const FeedbackCard: FC<Props> = ({ id, title, name, content }) => {
+    const initials = name.split(" ").map((string) => string[0]).join("");
+
     return (
         <div
-            className={`flex  justify-between items-start flex-col px-10 py-12 rounded-[20px] max-w-[350px] ${id === feedbacks.length
+            className={`flex justify-between items-start flex-col px-10 py-12 rounded-[20px] max-w-[350px] ${id === feedbacks.length
                 ? "md:mr-0 sm:mr-0 mr-0"
                 : "md:mr-10 sm:mr-5 mr-0"
                 } cursor-pointer feedback-card`}
@@ -24,12 +32,14 @@ const FeedbackCard: FC<Props> = ({ id, title, name, content }) => {
 
             <div className="flex flex-row ">
                 <div className="w-[60px] h-[60px] flex justify-center items-center bg-dark-gradient rounded-full ">
-                    <p className="text-[22px] font-semibold font-montserrat text-gradient ">
-                        {name
-                            .split(" ")
-                            .map((string) => string[0])
-                            .join("")}
-                    </p>
+                    <motion.p
+                        className="text-[22px] font-semibold font-montserrat text-gradient"
+                        initial="hidden"
+                        animate="visible"
+                        variants={initialsVariants}
+                    >
+                        {initials}
+                    </motion.p>
                 </div>
                 <div className="flex flex-col ml-4">
                     <h4 className="font-montserrat font-semibold text-[20px] leading-[32px] text-white">
